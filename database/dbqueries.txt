@@ -1,0 +1,45 @@
+ALTER TABLE `versions` ADD `make_id` INT NULL DEFAULT NULL AFTER `id_car_generation`; 
+
+
+ALTER TABLE `versions` ADD `first_registration` VARCHAR(255) NULL DEFAULT NULL AFTER `transmissiontype`, ADD `initial_registration_estonia` VARCHAR(255) NULL DEFAULT NULL AFTER `first_registration`, ADD `category` VARCHAR(255) NULL DEFAULT NULL AFTER `initial_registration_estonia`, ADD `subcategory` VARCHAR(255) NULL DEFAULT NULL AFTER `category`, ADD `body` VARCHAR(255) NULL DEFAULT NULL AFTER `subcategory`, ADD `bodytype` VARCHAR(255) NULL DEFAULT NULL AFTER `body`, ADD `length` VARCHAR(255) NULL DEFAULT NULL AFTER `bodytype`, ADD `width` VARCHAR(255) NULL DEFAULT NULL AFTER `length`, ADD `height` VARCHAR(255) NULL DEFAULT NULL AFTER `width`, ADD `full_mass` VARCHAR(255) NULL DEFAULT NULL AFTER `height`, ADD `registered_mass` VARCHAR(255) NULL DEFAULT NULL AFTER `full_mass`, ADD `empty_mass` VARCHAR(255) NULL DEFAULT NULL AFTER `registered_mass`, ADD `trailer_with_breakes` VARCHAR(255) NULL DEFAULT NULL AFTER `empty_mass`, ADD `trailer_without_breakes` VARCHAR(255) NULL DEFAULT NULL AFTER `trailer_with_breakes`, ADD `total_trailer_mass` VARCHAR(255) NULL DEFAULT NULL AFTER `trailer_without_breakes`, ADD `towbar_load` VARCHAR(255) NULL DEFAULT NULL AFTER `total_trailer_mass`, ADD `maximum_speed` VARCHAR(255) NULL DEFAULT NULL AFTER `towbar_load`, ADD `emission_standard` VARCHAR(255) NULL DEFAULT NULL AFTER `maximum_speed`, ADD `noise_level` VARCHAR(255) NULL DEFAULT NULL AFTER `emission_standard`, ADD `engine_capacity_cc` VARCHAR(255) NULL DEFAULT NULL AFTER `noise_level`, ADD `engine_power_kw` VARCHAR(255) NULL DEFAULT NULL AFTER `engine_capacity_cc`, ADD `engine_type` VARCHAR(255) NULL DEFAULT NULL AFTER `engine_power_kw`, ADD `gearbox_type` VARCHAR(255) NULL DEFAULT NULL AFTER `engine_type`, ADD `hybrid_type` VARCHAR(255) NULL DEFAULT NULL AFTER `gearbox_type`, ADD `fuel_combination` VARCHAR(255) NULL DEFAULT NULL AFTER `hybrid_type`, ADD `fuel_type` VARCHAR(255) NULL DEFAULT NULL AFTER `fuel_combination`, ADD `additional_fuel` VARCHAR(255) NULL DEFAULT NULL AFTER `fuel_type`, ADD `co2_nedc` VARCHAR(255) NULL DEFAULT NULL AFTER `additional_fuel`, ADD `co2_wltp` VARCHAR(255) NULL DEFAULT NULL AFTER `co2_nedc`, ADD `average_fuel_consuption` VARCHAR(255) NULL DEFAULT NULL AFTER `co2_wltp`, ADD `average_fuel_consuption_wltp` VARCHAR(255) NULL DEFAULT NULL AFTER `average_fuel_consuption`, ADD `electric_driving_range` VARCHAR(255) NULL DEFAULT NULL AFTER `average_fuel_consuption_wltp`, ADD `door` VARCHAR(255) NULL DEFAULT NULL AFTER `electric_driving_range`, ADD `num_of_seats` VARCHAR(255) NULL DEFAULT NULL AFTER `door`, ADD `total_axle` VARCHAR(255) NULL DEFAULT NULL AFTER `num_of_seats`, ADD `number_of_wheels` VARCHAR(255) NULL DEFAULT NULL AFTER `total_axle`, ADD `steering_wheel` VARCHAR(255) NULL DEFAULT NULL AFTER `number_of_wheels`, ADD `towing_wheel` VARCHAR(255) NULL DEFAULT NULL AFTER `steering_wheel`, ADD `make` VARCHAR(255) NULL DEFAULT NULL AFTER `towing_wheel`, ADD `model` VARCHAR(255) NULL DEFAULT NULL AFTER `make`;
+
+
+move make_id,modle_id and body_type_id after id.
+
+ALTER TABLE `versions` ADD `transmission_id` INT NULL DEFAULT NULL COMMENT 'Gearbox_type' AFTER `body_type_id`, ADD `engine_type_id` INT NULL DEFAULT NULL COMMENT 'Fuel_type' AFTER `transmission_id`; 
+
+
+====================================================================================
+====================================================================================
+
+31-03-2024
+---------------------
+ALTER TABLE `car_varients` ADD `make_filter` INT NOT NULL DEFAULT '0' AFTER `model_carish`, ADD `version_filter` INT NOT NULL DEFAULT '0' AFTER `make_filter`;
+
+ALTER TABLE `makes` CHANGE `status` `status` INT NULL DEFAULT '0';
+
+ALTER TABLE `models` CHANGE `status` `status` INT NULL DEFAULT '0';
+
+====================================================================================
+====================================================================================
+
+03-04-2024
+---------------------
+CREATE TABLE import_files (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    file_path VARCHAR(255) NOT NULL,
+    status VARCHAR(255) DEFAULT 'pending',
+    type VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+ALTER TABLE `import_files` ADD `file_name` VARCHAR(255) NULL DEFAULT NULL AFTER `id`;
+
+
+====================================================================================
+====================================================================================
+
+10-12-2024
+---------------------
+ALTER TABLE `customers` ADD `phone_changed_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `phone_verification_status`;
